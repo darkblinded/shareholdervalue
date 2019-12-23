@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shareholder Value v1</title>
+    <script src="./static/js/Chart.js" type="application/javascript"></script>
+    <style src="./static/css/Chart.css" type="application/css"></style>
+    <script src="static/js/palette.js" type="application/javascript"></script>
+
+    <style>
+        html{
+            min-height:100%;/* make sure it is at least as tall as the viewport */
+            position:relative;
+        }
+
+        body{
+            height:100%; /* force the BODY element to match the height of the HTML element */
+        }
+
+        .center {
+            margin: auto;
+        }
+
+        h1 {
+            font-family: sans;
+        }
+
+        @media screen and (orientation:landscape) {
+            .square{
+                height: 80vh;
+                width: 80vh;
+            }
+
+            .page{
+                max-width: 60vw;
+            }
+        }
+        @media screen and (orientation:portrait) {
+            .square{
+                height: 80vw;
+                width: 80vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page center">
+        <h1 id="diagramTitle">Qua</h1>
+        <div class="square center">
+            <canvas id="myChart" width="400" height="400"></canvas>
+            <script src="static/js/app.js" type="application/javascript"></script>
+        </div>
+    </div>
+</body>
+</html>

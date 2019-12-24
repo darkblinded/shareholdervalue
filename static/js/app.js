@@ -13,7 +13,14 @@ const yMetric = [
     'Market Share',
     'Business',
     'Revenue',
-    'Value'
+    'Value',
+    'Benefit',
+    'Margin'
+];
+
+const xMetric = [
+    'Time',
+    'Market Share'
 ];
 
 const diagramTitle = [
@@ -26,12 +33,17 @@ const diagramTitle = [
     'Vertical Sales',
     'Inside Sales',
     'Business Division',
-    'Business Unit'
+    'Business Unit',
+    'Merger',
+    'Department 11',
+    'Strategy',
+    'Current planning'
 ];
 
 const binarySets = [
     ['We', 'Our competitors'],
-    ['Import', 'Export']
+    ['Import', 'Export'],
+    ['Last year', 'Current Year']
 ]
 
 const comparisonSets = [
@@ -70,7 +82,13 @@ function getRandomChartContent() {
         scales: {
             yAxes: [{
                 ticks: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    fontSize: 18
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontSize: 18
                 }
             }]
         }
@@ -79,8 +97,6 @@ function getRandomChartContent() {
     let dataset = {}
 
     dataset.data = Array.from({length: Math.floor(Math.random() * (diagramMeta.datasetMaxSize - diagramMeta.datasetMinSize) + diagramMeta.datasetMinSize)}, () => Math.floor(Math.random() * 40));
-
-    content.data.datasets = [dataset];
 
     switch (diagramMeta.metatype) {
         case 'binary':
@@ -96,26 +112,30 @@ function getRandomChartContent() {
             break;
     }
 
+
     switch (diagramMeta.type) {
         case 'line':
+            dataset.fill = false;
+            dataset.lineTension = 0;
         case 'bar':
-            content.data.datasets[0].label = '';
+            dataset.label = '';
             content.options.legend = { display: false }
             break;
         default:
             break;
     }
 
-    content.options.scales.yAxes = [{
-        scaleLabel: {
+    content.options.scales.yAxes[0].scaleLabel = {
             display: true,
-            labelString: getRandomElement(yMetric)
-        }
-    }]
+            labelString: getRandomElement(yMetric),
+            fontSize: 32
+    }
 
-    dataset.backgroundColor = palette('tol-rainbow', dataset.data.length).map(function(hex) {
+    dataset.backgroundColor = palette('tol', dataset.data.length).map(function(hex) {
         return '#' + hex;
     });
+
+    content.data.datasets = [dataset];
 
     return content;
 }
